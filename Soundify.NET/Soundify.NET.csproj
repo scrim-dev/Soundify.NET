@@ -1,0 +1,118 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.22000.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Company>Scrimmane</Company>
+    <Copyright>Scrim (Scrimmane)</Copyright>
+    <Description>Multi-media streaming application</Description>
+    <PackageIcon>InnerShadowLogo.png</PackageIcon>
+    <AssemblyVersion>MainForm.AppVersion</AssemblyVersion>
+    <FileVersion>MainForm.AppVersion</FileVersion>
+    <StartupObject>Soundify.NET.Program</StartupObject>
+    <ApplicationIcon>LogoBlue.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\Zodi\.nuget\packages\dubya.windowsmediacontroller\2.5.5\contentFiles\any\net8.0-windows10.0.22000\Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="C:\Users\Zodi\.nuget\packages\dubya.windowsmediacontroller\2.5.5\contentFiles\any\net8.0-windows10.0.22000\Icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Banner.png" />
+    <None Remove="Resources\BannerDropShadowLogo.png" />
+    <None Remove="Resources\buttonsfx.wav" />
+    <None Remove="Resources\discord.png" />
+    <None Remove="Resources\DropShadow.png" />
+    <None Remove="Resources\expand-solid.png" />
+    <None Remove="Resources\Failure.wav" />
+    <None Remove="Resources\gear-solid.png" />
+    <None Remove="Resources\github.png" />
+    <None Remove="Resources\globe-solid.png" />
+    <None Remove="Resources\house-solid.png" />
+    <None Remove="Resources\InnerShadowLogo.png" />
+    <None Remove="Resources\LogoBlank.png" />
+    <None Remove="Resources\LogoBlue.png" />
+    <None Remove="Resources\music-solid.png" />
+    <None Remove="Resources\puzzle-piece-solid.png" />
+    <None Remove="Resources\ScrimGear.png" />
+    <None Remove="Resources\ScrimGearGrad2.png" />
+    <None Remove="Resources\ScrimSlogo.png" />
+    <None Remove="Resources\SideGripIcon.png" />
+    <None Remove="Resources\soundcloud.png" />
+    <None Remove="Resources\spotify.png" />
+    <None Remove="Resources\Success.wav" />
+    <None Remove="Resources\youtube.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="LogoBlue.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\..\..\Pictures\PhotoEditing\ScrimLogos\RandomLogos\SoundifyNew\InnerShadowLogo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Banner.png" />
+    <EmbeddedResource Include="Resources\BannerDropShadowLogo.png" />
+    <EmbeddedResource Include="Resources\buttonsfx.wav" />
+    <EmbeddedResource Include="Resources\discord.png" />
+    <EmbeddedResource Include="Resources\DropShadow.png" />
+    <EmbeddedResource Include="Resources\expand-solid.png" />
+    <EmbeddedResource Include="Resources\Failure.wav" />
+    <EmbeddedResource Include="Resources\gear-solid.png" />
+    <EmbeddedResource Include="Resources\github.png" />
+    <EmbeddedResource Include="Resources\globe-solid.png" />
+    <EmbeddedResource Include="Resources\house-solid.png" />
+    <EmbeddedResource Include="Resources\InnerShadowLogo.png" />
+    <EmbeddedResource Include="Resources\LogoBlank.png" />
+    <EmbeddedResource Include="Resources\LogoBlue.png" />
+    <EmbeddedResource Include="Resources\music-solid.png" />
+    <EmbeddedResource Include="Resources\puzzle-piece-solid.png" />
+    <EmbeddedResource Include="Resources\ScrimGear.png" />
+    <EmbeddedResource Include="Resources\ScrimGearGrad2.png" />
+    <EmbeddedResource Include="Resources\ScrimSlogo.png" />
+    <EmbeddedResource Include="Resources\SideGripIcon.png" />
+    <EmbeddedResource Include="Resources\soundcloud.png" />
+    <EmbeddedResource Include="Resources\spotify.png" />
+    <EmbeddedResource Include="Resources\Success.wav" />
+    <EmbeddedResource Include="Resources\youtube.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AudioSwitcher.AudioApi.CoreAudio" Version="3.0.3">
+      <NoWarn>NU1701</NoWarn>
+    </PackageReference>
+    <PackageReference Include="Colorful.Console" Version="1.2.15" />
+    <PackageReference Include="Dubya.WindowsMediaController" Version="2.5.5" />
+    <PackageReference Include="Microsoft.Toolkit.Uwp.Notifications" Version="7.1.3" />
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2478.35" />
+    <PackageReference Include="ReaLTaiizor" Version="3.8.0.5" />
+    <PackageReference Include="VRCOscLib" Version="1.4.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34902.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Soundify.NET", "Soundify.NET\Soundify.NET.csproj", "{AFA72615-D21C-42CB-B428-04B3C4F35C94}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B33AC759-C541-4678-9D6C-6228D6CD380B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AFA72615-D21C-42CB-B428-04B3C4F35C94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFA72615-D21C-42CB-B428-04B3C4F35C94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFA72615-D21C-42CB-B428-04B3C4F35C94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFA72615-D21C-42CB-B428-04B3C4F35C94}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33E7BC5B-DE48-4AB0-B38E-9D7FC2F44742}
+	EndGlobalSection
+EndGlobal
