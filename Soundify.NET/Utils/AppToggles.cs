@@ -13,5 +13,6 @@ namespace Soundify.NET.Utils
         public static bool AppSoundsTog { get; set; } = false;
         public static bool ConsoleLogTog { get; set; } = false;
         public static bool SaveLogsTog { get; set; } = false;
+        public static bool UntrustedUrisTog {  get; set; } = false;
     }
 }

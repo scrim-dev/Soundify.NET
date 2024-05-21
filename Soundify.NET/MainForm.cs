@@ -10,7 +10,7 @@ namespace Soundify.NET
 {
     public partial class MainForm : Form
     {
-        public const string AppVersion = "1.0.0.0";
+        public const string AppVersion = "1.0.0.1";
 
         //Credits to Jonas Kohl for dark title bar
         [DllImport("dwmapi.dll")]
@@ -119,13 +119,15 @@ namespace Soundify.NET
             if (SoundFXCheckBox.Checked) { AppToggles.AppSoundsTog = true; } else { AppToggles.AppSoundsTog = false; }
             if (LogsCheckBox.Checked) { AppToggles.ConsoleLogTog = true; } else { AppToggles.ConsoleLogTog = false; }
             if (SaveLogsCloseCheckBox.Checked) { AppToggles.SaveLogsTog = true; } else { AppToggles.SaveLogsTog = false; }
+            if(UntrustedUrisCheckBox.Checked) { AppToggles.UntrustedUrisTog = true; } else { AppToggles.UntrustedUrisTog = false; }
+
+            TopMost = AppToggles.TopMostTog;
         }
 
         //OSC
         private void OSCTimer_Tick(object sender, EventArgs e)
         {
             if (OSCToggles.MainOSCTog) { Send.SendOSC(); }
-
         }
 
         private void LogoBox_Click(object sender, EventArgs e)
@@ -135,6 +137,18 @@ namespace Soundify.NET
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (AppToggles.SaveLogsTog)
+            {
+                if (!File.Exists($"{Directories.AppFolder}\\Logs.txt"))
+                {
+                    try { File.WriteAllText($"{Directories.AppFolder}\\Logs.txt", RichTextBoxConsole.Text); } catch { }
+                }
+                else
+                {
+                    File.WriteAllText($"{Directories.AppFolder}\\Logs.txt", RichTextBoxConsole.Text);
+                }
+            }
+
             DisposeAll();
             Process.GetCurrentProcess().Kill();
         }
@@ -207,13 +221,43 @@ namespace Soundify.NET
             }
         }
 
+        private static string? Newuri { get; set; } = null;
         private void SetCustomUrlBtn_Click(object sender, EventArgs e)
         {
-            try { CustomWebView.Source = new(CustomURLTextBox.Text); } catch { }
-            CustomWebView.Size = new(835, 607);
-            CustomWebView.Dock = DockStyle.Fill;
-            try { CustomWebView.Reload(); } catch { }
-            CustomWebView.ZoomFactor = 1;
+            if (AppToggles.UntrustedUrisTog)
+            {
+                CustomWebView.Enabled = true;
+                try { CustomWebView.Source = new(CustomURLTextBox.Text); } catch { }
+                CustomWebView.Size = new(835, 607);
+                CustomWebView.Dock = DockStyle.Fill;
+                try { CustomWebView.Reload(); } catch { }
+                CustomWebView.ZoomFactor = 1;
+            }
+            else
+            {
+                Newuri = CustomURLTextBox.Text;
+                if (!string.IsNullOrEmpty(Newuri))
+                {
+                    if (URLs.WhitelistedMedia.Any(uri => Newuri.Contains(uri)))
+                    {
+                        CustomWebView.Size = new Size(838, 647);
+                        CustomWebView.Dock = DockStyle.Fill;
+                        try { CustomWebView.Source = new Uri(Newuri); }
+                        catch
+                        {
+                            MessageBox.Show("Check console","ERROR");
+                            ConsoleLog.Error("Failed to load URL (Make sure to add https://)\n" +
+                            "If you keep getting this error contact Scrim or go to the Support channel on discord");
+                        }
+                        CustomWebView.ZoomFactor = 0.9;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Check console", "ERROR");
+                        ConsoleLog.Error("Failed to load URL! The URL is not whitelisted or typed incorrectly!");
+                    }
+                }
+            }
         }
 
         private void SaveCustomUrlBtn_Click(object sender, EventArgs e)
@@ -230,6 +274,7 @@ namespace Soundify.NET
 
         private void ResetCustomUrlBtn_Click(object sender, EventArgs e)
         {
+            CustomWebView.Enabled = false;
             try { CustomWebView.Dispose(); } catch { }
             CustomWebView.Size = new(10, 10);
             CustomWebView.Dock = DockStyle.None;

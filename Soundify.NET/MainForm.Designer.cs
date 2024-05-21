@@ -452,7 +452,7 @@
             // 
             // SpotifyTPage
             // 
-            SpotifyTPage.BackColor = Color.FromArgb(41, 50, 63);
+            SpotifyTPage.BackColor = Color.FromArgb(30, 30, 30);
             SpotifyTPage.Controls.Add(SpotifyWebView);
             SpotifyTPage.Location = new Point(139, 4);
             SpotifyTPage.Name = "SpotifyTPage";
@@ -475,7 +475,7 @@
             // 
             // SoundcloudTPage
             // 
-            SoundcloudTPage.BackColor = Color.FromArgb(41, 50, 63);
+            SoundcloudTPage.BackColor = Color.FromArgb(30, 30, 30);
             SoundcloudTPage.Controls.Add(SoundCloudWebView);
             SoundcloudTPage.Location = new Point(139, 4);
             SoundcloudTPage.Name = "SoundcloudTPage";
@@ -498,7 +498,7 @@
             // 
             // CustomMediaTPage
             // 
-            CustomMediaTPage.BackColor = Color.FromArgb(41, 50, 63);
+            CustomMediaTPage.BackColor = Color.FromArgb(30, 30, 30);
             CustomMediaTPage.Controls.Add(CustomWebView);
             CustomMediaTPage.Controls.Add(NoLoadLabel);
             CustomMediaTPage.Location = new Point(139, 4);
@@ -532,7 +532,7 @@
             // 
             // HelpTPage
             // 
-            HelpTPage.BackColor = Color.FromArgb(41, 50, 63);
+            HelpTPage.BackColor = Color.FromArgb(30, 30, 30);
             HelpTPage.Controls.Add(HelpLabel6);
             HelpTPage.Controls.Add(HelpLabel5);
             HelpTPage.Controls.Add(HelpLabel4);
