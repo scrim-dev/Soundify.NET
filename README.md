@@ -10,4 +10,5 @@ A free and easy to use multi-platform music streaming app that allows you to pla
 > Media Controller
 
 (This is the updated .NET 8.0, better version of https://github.com/scrim-dev/Soundify-OLD)
+
 (This is still being worked on and won't release until a bit later but the source will be public)
