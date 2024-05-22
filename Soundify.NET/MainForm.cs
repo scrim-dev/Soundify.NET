@@ -10,7 +10,7 @@ namespace Soundify.NET
 {
     public partial class MainForm : Form
     {
-        public const string AppVersion = "1.0.0.1";
+        public const string AppVersion = "1.0.0.2";
 
         //Credits to Jonas Kohl for dark title bar
         [DllImport("dwmapi.dll")]
@@ -46,6 +46,7 @@ namespace Soundify.NET
         {
             UseImmersiveDarkMode(handle: Handle, true);
             InitializeComponent();
+            Web.Setup();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -56,15 +57,15 @@ namespace Soundify.NET
             MinimizeBox = true;
             StartPosition = FormStartPosition.CenterParent;
 
-            //load WebViews
+            //Load WebViews
             try { SpotifyWebView.Source = new("https://open.spotify.com/"); } catch { }
             try { SoundCloudWebView.Source = new("https://soundcloud.com/discover"); } catch { }
 
             //Timers
             MainTimer.Enabled = true;
-            MainTimer.Interval = 1000;
+            MainTimer.Interval = 10;
             OSCTimer.Enabled = true;
-            OSCTimer.Interval = 1355; //1.3 rate limit
+            OSCTimer.Interval = 1355; //1.3s rate limit
 
             //Setup Form console
             var rtbc = new TextBoxLog(RichTextBoxConsole);
@@ -94,6 +95,14 @@ namespace Soundify.NET
             MediaTimelineBar.Value = 0;
             RichTextBoxConsole.Clear();
             Controller.TimelineBar = MediaTimelineBar;
+
+            if (File.Exists($"{Directories.AppFolder}\\CustomUrl.db"))
+            {
+                string s = File.ReadAllText($"{Directories.AppFolder}\\CustomUrl.db");
+                CustomURLTextBox.Text = s;
+            }
+
+            Notify.SendToastNotification("Soundify", "Welcome to Soundify!"); //Just to test
         }
 
         private void DisposeAll()
@@ -110,18 +119,23 @@ namespace Soundify.NET
         //Constant timer
         private void MainTimer_Tick(object sender, EventArgs e)
         {
-            if (ShowSongNameCheckBox.Checked) { OSCToggles.SongNameTog = true; } else { OSCToggles.SongNameTog = false; }
-            if (SoundifyNameCheckBox.Checked) { OSCToggles.SoundifyNameTog = true; } else { OSCToggles.SoundifyNameTog = false; }
-            if (ListeningToCheckBox.Checked) { OSCToggles.ListeningToMediaTog = true; } else { OSCToggles.ListeningToMediaTog = false; }
-            if (BorderTextCheckBox.Checked) { OSCToggles.BorderFXTog = true; } else { OSCToggles.BorderFXTog = false; }
-            if (TopMostCheckBox.Checked) { AppToggles.TopMostTog = true; } else { AppToggles.TopMostTog = false; }
-            if (NotifsCheckBox.Checked) { AppToggles.NotifsTog = true; } else { AppToggles.NotifsTog = false; }
-            if (SoundFXCheckBox.Checked) { AppToggles.AppSoundsTog = true; } else { AppToggles.AppSoundsTog = false; }
-            if (LogsCheckBox.Checked) { AppToggles.ConsoleLogTog = true; } else { AppToggles.ConsoleLogTog = false; }
-            if (SaveLogsCloseCheckBox.Checked) { AppToggles.SaveLogsTog = true; } else { AppToggles.SaveLogsTog = false; }
-            if(UntrustedUrisCheckBox.Checked) { AppToggles.UntrustedUrisTog = true; } else { AppToggles.UntrustedUrisTog = false; }
-
+            ToggleOptions();
             TopMost = AppToggles.TopMostTog;
+        }
+
+        private void ToggleOptions()
+        {
+            //This is done wayyy better
+            OSCToggles.SongNameTog = ShowSongNameCheckBox.Checked;
+            OSCToggles.SoundifyNameTog = SoundifyNameCheckBox.Checked;
+            OSCToggles.ListeningToMediaTog = ListeningToCheckBox.Checked;
+            OSCToggles.BorderFXTog = BorderTextCheckBox.Checked;
+            AppToggles.TopMostTog = TopMostCheckBox.Checked;
+            AppToggles.NotifsTog = NotifsCheckBox.Checked;
+            AppToggles.AppSoundsTog = SoundFXCheckBox.Checked;
+            AppToggles.ConsoleLogTog = LogsCheckBox.Checked;
+            AppToggles.SaveLogsTog = SaveLogsCloseCheckBox.Checked;
+            AppToggles.UntrustedUrisTog = UntrustedUrisCheckBox.Checked;
         }
 
         //OSC
@@ -243,18 +257,18 @@ namespace Soundify.NET
                         CustomWebView.Size = new Size(838, 647);
                         CustomWebView.Dock = DockStyle.Fill;
                         try { CustomWebView.Source = new Uri(Newuri); }
-                        catch
+                        catch(Exception ex)
                         {
-                            MessageBox.Show("Check console","ERROR");
                             ConsoleLog.Error("Failed to load URL (Make sure to add https://)\n" +
-                            "If you keep getting this error contact Scrim or go to the Support channel on discord");
+                            $"If you keep getting this error contact Scrim or go to the Support channel on discord\n\n{ex}");
+                            MessageBox.Show("Check console", "ERROR");
                         }
                         CustomWebView.ZoomFactor = 0.9;
                     }
                     else
                     {
-                        MessageBox.Show("Check console", "ERROR");
                         ConsoleLog.Error("Failed to load URL! The URL is not whitelisted or typed incorrectly!");
+                        MessageBox.Show("Check console", "ERROR");
                     }
                 }
             }
@@ -275,8 +289,8 @@ namespace Soundify.NET
         private void ResetCustomUrlBtn_Click(object sender, EventArgs e)
         {
             CustomWebView.Enabled = false;
-            try { CustomWebView.Dispose(); } catch { }
-            CustomWebView.Size = new(10, 10);
+            // { CustomWebView.Dispose(); } catch { }
+            CustomWebView.Size = new(1, 1);
             CustomWebView.Dock = DockStyle.None;
             try { CustomWebView.Reload(); } catch { }
             CustomWebView.ZoomFactor = 0;
@@ -290,6 +304,7 @@ namespace Soundify.NET
             EnableOscBtn.PrimaryColor = red;
             DisableOscBtn.PrimaryColor = yellow;
             Alerts.Success();
+            EnableOscBtn.Refresh();
         }
 
         //64, 158, 255
@@ -300,6 +315,7 @@ namespace Soundify.NET
             EnableOscBtn.PrimaryColor = defaultcolor;
             DisableOscBtn.PrimaryColor = defaultcolor;
             Alerts.SFX();
+            DisableOscBtn.Refresh();
         }
 
         private void PrevMediaBtn_Click(object sender, EventArgs e)

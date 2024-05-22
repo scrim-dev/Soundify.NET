@@ -944,7 +944,6 @@
             SoundifyNameCheckBox.BaseColor = Color.FromArgb(64, 64, 64);
             SoundifyNameCheckBox.BorderColor = Color.DodgerBlue;
             SoundifyNameCheckBox.Checked = true;
-            SoundifyNameCheckBox.Enabled = false;
             SoundifyNameCheckBox.Font = new Font("Segoe UI", 10F);
             SoundifyNameCheckBox.ForeColor = Color.FromArgb(243, 243, 243);
             SoundifyNameCheckBox.Location = new Point(6, 52);

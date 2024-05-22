@@ -10,36 +10,40 @@ namespace Soundify.NET.OSC
 {
     internal class OSCHandler
     {
-        public static RichTextBox? OscTextBox {  get; set; }
-        private static readonly string TextBorder = $"[{string.Concat(Enumerable.Repeat("=", 25))}]";
-        private static readonly string TextBorder2 = $"[{string.Concat(Enumerable.Repeat("x-x-", 10))}]";
+        public static RichTextBox? OscTextBox { get; set; }
+        private static readonly string TextBorder = $"+{string.Concat(Enumerable.Repeat("-", 25))}+";
 
-        public static void SendSongBorder(string song)
+        public static void SendSongToOsc(string song)
         {
-            OscChatbox.SendMessage($"[Soundify]\n{TextBorder}\n\n{song}\n\n{TextBorder}", true, false);
-            OscTextBox.Text = $"[Soundify]\n{TextBorder}\n\n{song}\n\n{TextBorder}";
-            ConsoleLog.Log("Sent SendSongBorder() to chatbox");
-        }
-
-        public static void SendSongBorder2(string song)
-        {
-            OscChatbox.SendMessage($"[Soundify]\n{TextBorder2}\n\n{song}\n\n{TextBorder2}", true, false);
-            OscTextBox.Text = $"[Soundify]\n{TextBorder2}\n\n{song}\n\n{TextBorder2}";
-            ConsoleLog.Log("Sent SendSongBorder2() to chatbox");
-        }
-
-        public static void SendSong(string song)
-        {
-            OscChatbox.SendMessage($"[Soundify]\n{song}", true, false);
-            OscTextBox.Text = $"[Soundify]\n{song}";
-            ConsoleLog.Log("Sent SendSong() to chatbox");
-        }
-
-        public static void SendSongFancy(string song)
-        {
-            OscChatbox.SendMessage($"\v\v\v[Soundify]\n{song}\v\v\v", true, false);
-            OscTextBox.Text = $"\v\v\v[Soundify]\n{song}\v\v\v";
-            ConsoleLog.Log("Sent SendSongFancy() to chatbox");
+            //Yandere dev ahh setup :sob:
+            if (OSCToggles.ListeningToMediaTog)
+            {
+                var s = $"Listening to: {song}";
+                OscChatbox.SendMessage(s, true, false);
+                OscTextBox.Text = s;
+                ConsoleLog.Log("OSC SENT: " + s);
+            }
+            else if (OSCToggles.SoundifyNameTog)
+            {
+                var s = $"[Soundify]\n{song}";
+                OscChatbox.SendMessage(s, true, false);
+                OscTextBox.Text = s;
+                ConsoleLog.Log("OSC SENT: " + s);
+            }
+            else if (OSCToggles.BorderFXTog)
+            {
+                var s = $"[Soundify]\n{TextBorder}\n| {song} |\n{TextBorder}";
+                OscChatbox.SendMessage(s, true, false);
+                OscTextBox.Text = s;
+                ConsoleLog.Log("OSC SENT: " + s);
+            }
+            else if (OSCToggles.SongNameTog)
+            {
+                var s = $"[{song}]";
+                OscChatbox.SendMessage(s, true, false);
+                OscTextBox.Text = s;
+                ConsoleLog.Log("OSC SENT: " + s);
+            }
         }
     }
 }

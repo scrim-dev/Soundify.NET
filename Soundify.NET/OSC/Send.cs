@@ -11,25 +11,8 @@ namespace Soundify.NET.OSC
     {
         public static void SendOSC()
         {
-            if (OSCToggles.ListeningToMediaTog)
-            {
-                OSCHandler.SendSongBorder2($"Listening to: {MediaInfo.SongName} by {MediaInfo.SongArtist}");
-            }
-
-            if (OSCToggles.BorderFXTog)
-            {
-                OSCHandler.SendSongBorder($"{MediaInfo.SongName} by {MediaInfo.SongArtist}");
-            }
-
-            if (OSCToggles.SongNameTog)
-            {
-                OSCHandler.SendSong($"{MediaInfo.SongName}");
-            }
-
-            if (OSCToggles.SoundifyNameTog)
-            {
-                //OSCHandler.SendSongFancy("{MediaInfo.SongName} by {MediaInfo.SongArtist}");
-            }
+            OSCHandler.SendSongToOsc($"{MediaInfo.SongName} by {MediaInfo.SongArtist}");
+            //Alerts.SendFX();
         }
     }
 }
