@@ -83,6 +83,7 @@
             LogoBoxMedControls = new PictureBox();
             MediaContLabel = new Label();
             VRCOscPanel = new Panel();
+            OneAtATimeLabelLOL = new Label();
             OscExampleTextBox = new RichTextBox();
             ExampleOscLabel = new Label();
             DisableOscBtn = new ReaLTaiizor.Controls.HopeButton();
@@ -212,10 +213,12 @@
             // 
             // ThankYouLabel
             // 
+            ThankYouLabel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             ThankYouLabel.AutoSize = true;
-            ThankYouLabel.Location = new Point(3, 217);
+            ThankYouLabel.Font = new Font("Segoe UI", 15F);
+            ThankYouLabel.Location = new Point(0, 213);
             ThankYouLabel.Name = "ThankYouLabel";
-            ThankYouLabel.Size = new Size(219, 21);
+            ThankYouLabel.Size = new Size(273, 28);
             ThankYouLabel.TabIndex = 9;
             ThankYouLabel.Text = "Thank you for using Soundify!";
             // 
@@ -452,7 +455,7 @@
             // 
             // SpotifyTPage
             // 
-            SpotifyTPage.BackColor = Color.FromArgb(30, 30, 30);
+            SpotifyTPage.BackColor = Color.FromArgb(41, 50, 63);
             SpotifyTPage.Controls.Add(SpotifyWebView);
             SpotifyTPage.Location = new Point(139, 4);
             SpotifyTPage.Name = "SpotifyTPage";
@@ -475,7 +478,7 @@
             // 
             // SoundcloudTPage
             // 
-            SoundcloudTPage.BackColor = Color.FromArgb(30, 30, 30);
+            SoundcloudTPage.BackColor = Color.FromArgb(41, 50, 63);
             SoundcloudTPage.Controls.Add(SoundCloudWebView);
             SoundcloudTPage.Location = new Point(139, 4);
             SoundcloudTPage.Name = "SoundcloudTPage";
@@ -498,7 +501,7 @@
             // 
             // CustomMediaTPage
             // 
-            CustomMediaTPage.BackColor = Color.FromArgb(30, 30, 30);
+            CustomMediaTPage.BackColor = Color.FromArgb(41, 50, 63);
             CustomMediaTPage.Controls.Add(CustomWebView);
             CustomMediaTPage.Controls.Add(NoLoadLabel);
             CustomMediaTPage.Location = new Point(139, 4);
@@ -532,7 +535,7 @@
             // 
             // HelpTPage
             // 
-            HelpTPage.BackColor = Color.FromArgb(30, 30, 30);
+            HelpTPage.BackColor = Color.FromArgb(41, 50, 63);
             HelpTPage.Controls.Add(HelpLabel6);
             HelpTPage.Controls.Add(HelpLabel5);
             HelpTPage.Controls.Add(HelpLabel4);
@@ -837,6 +840,7 @@
             LogoBoxMedControls.SizeMode = PictureBoxSizeMode.Zoom;
             LogoBoxMedControls.TabIndex = 4;
             LogoBoxMedControls.TabStop = false;
+            LogoBoxMedControls.Click += LogoBoxMedControls_Click;
             // 
             // MediaContLabel
             // 
@@ -851,6 +855,7 @@
             // 
             VRCOscPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
             VRCOscPanel.BackColor = Color.FromArgb(35, 35, 35);
+            VRCOscPanel.Controls.Add(OneAtATimeLabelLOL);
             VRCOscPanel.Controls.Add(OscExampleTextBox);
             VRCOscPanel.Controls.Add(ExampleOscLabel);
             VRCOscPanel.Controls.Add(DisableOscBtn);
@@ -864,6 +869,17 @@
             VRCOscPanel.Name = "VRCOscPanel";
             VRCOscPanel.Size = new Size(441, 603);
             VRCOscPanel.TabIndex = 1;
+            // 
+            // OneAtATimeLabelLOL
+            // 
+            OneAtATimeLabelLOL.AutoSize = true;
+            OneAtATimeLabelLOL.Font = new Font("Segoe UI", 10F);
+            OneAtATimeLabelLOL.ForeColor = Color.Crimson;
+            OneAtATimeLabelLOL.Location = new Point(201, 0);
+            OneAtATimeLabelLOL.Name = "OneAtATimeLabelLOL";
+            OneAtATimeLabelLOL.Size = new Size(240, 19);
+            OneAtATimeLabelLOL.TabIndex = 20;
+            OneAtATimeLabelLOL.Text = "Toggle one at a time for better results";
             // 
             // OscExampleTextBox
             // 
@@ -913,7 +929,7 @@
             BorderTextCheckBox.BackColor = Color.FromArgb(35, 35, 35);
             BorderTextCheckBox.BaseColor = Color.FromArgb(64, 64, 64);
             BorderTextCheckBox.BorderColor = Color.DodgerBlue;
-            BorderTextCheckBox.Checked = true;
+            BorderTextCheckBox.Checked = false;
             BorderTextCheckBox.Font = new Font("Segoe UI", 10F);
             BorderTextCheckBox.ForeColor = Color.FromArgb(243, 243, 243);
             BorderTextCheckBox.Location = new Point(6, 108);
@@ -1534,5 +1550,6 @@
         private ReaLTaiizor.Controls.HopeButton ResetVolumeBtn;
         private ReaLTaiizor.Controls.HopeButton ApplyVolumeBtn;
         private ReaLTaiizor.Controls.PoisonProgressBar MediaTimelineBar;
+        private Label OneAtATimeLabelLOL;
     }
 }

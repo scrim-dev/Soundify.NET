@@ -17,7 +17,7 @@ namespace Soundify.NET.Utils
         {
             Client = new HttpClient();
             Client.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 OPR/110.0.0.0");
-            Client.DefaultRequestHeaders.Add("User-Agent", $"Soundify.NET/{MainForm.AppVersion}");
+            Client.DefaultRequestHeaders.Add("User-Agent", $"Soundify.NET/{Program.AppVersion}");
         }
     }
 }

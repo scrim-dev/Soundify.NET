@@ -61,6 +61,7 @@
             LogoBox.SizeMode = PictureBoxSizeMode.Zoom;
             LogoBox.TabIndex = 1;
             LogoBox.TabStop = false;
+            LogoBox.Click += LogoBox_Click;
             // 
             // UpdateLabel
             // 

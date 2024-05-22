@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,11 @@ namespace Soundify.NET
         {
             UpdateLabel.Text = "Quitting...";
             Application.Exit();
+        }
+
+        private void LogoBox_Click(object sender, EventArgs e)
+        {
+            try { Process.Start("https://github.com/scrim-dev/Soundify.NET"); } catch { }
         }
     }
 }

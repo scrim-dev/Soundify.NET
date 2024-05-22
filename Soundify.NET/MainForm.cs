@@ -10,8 +10,6 @@ namespace Soundify.NET
 {
     public partial class MainForm : Form
     {
-        public const string AppVersion = "1.0.0.2";
-
         //Credits to Jonas Kohl for dark title bar
         [DllImport("dwmapi.dll")]
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
@@ -85,7 +83,7 @@ namespace Soundify.NET
             SoundifyOSC.Setup("127.0.0.1", 9000);
 
             //Other
-            VERSIONTEXT.Text = AppVersion;
+            VERSIONTEXT.Text = Program.AppVersion;
             Directories.Load();
             Controller.Init();
             Controller.UpdateThread.Start();
@@ -146,7 +144,7 @@ namespace Soundify.NET
 
         private void LogoBox_Click(object sender, EventArgs e)
         {
-            try { Process.Start("https://github.com/scrim-dev"); } catch { }
+            try { Process.Start("https://github.com/scrim-dev/Soundify.NET"); } catch { }
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -213,7 +211,7 @@ namespace Soundify.NET
         {
             if (Directory.Exists(Directories.WebView2Folder))
             {
-                try { Directory.Delete(Directories.WebView2Folder, true); } 
+                try { Directory.Delete(Directories.WebView2Folder, true); }
                 catch { }
             }
         }
@@ -257,7 +255,7 @@ namespace Soundify.NET
                         CustomWebView.Size = new Size(838, 647);
                         CustomWebView.Dock = DockStyle.Fill;
                         try { CustomWebView.Source = new Uri(Newuri); }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             ConsoleLog.Error("Failed to load URL (Make sure to add https://)\n" +
                             $"If you keep getting this error contact Scrim or go to the Support channel on discord\n\n{ex}");
@@ -386,5 +384,7 @@ namespace Soundify.NET
             }
             catch { }
         }
+
+        private void LogoBoxMedControls_Click(object sender, EventArgs e) { }
     }
 }

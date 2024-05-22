@@ -2,6 +2,7 @@ namespace Soundify.NET
 {
     internal static class Program
     {
+        public const string AppVersion = "1.0.0.2";
         private static readonly string MutexName = "SoundifyNETCoreApp";
         [STAThread]
         static void Main()
